@@ -22,10 +22,11 @@ class ProductosController extends Controller
             foreach ($bodega as $bodegas) {
                 $total = Inventarios::all();
                 $producto->total = $total->where('id_producto', $producto->id)->sum('cantidad');
+                $productos->sortByDesc('total')->values()->all();
             }
         }
         return response()->json([
-            'productos' => $productos->sortByDesc('total')->values()->all(),
+            'productos' => $productos,
         ]);
     }
 
