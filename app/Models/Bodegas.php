@@ -17,15 +17,23 @@ class Bodegas extends Model
         'updated_by',
     ];
 
-    public function user(){
+    public function historiales()
+    {
+        return $this->hasMany(Historiales::class);
+    }
+
+    public function user()
+    {
         return $this->belongsTo(Usuarios::class, 'id_responsable');
     }
 
-    public function inventario(){
+    public function inventario()
+    {
         return $this->belongsToMany(Inventarios::class);
     }
 
-    public function historial(){
+    public function historial()
+    {
         return $this->belongsToMany(Historiales::class);
     }
 }

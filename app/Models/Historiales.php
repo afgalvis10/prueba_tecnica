@@ -17,15 +17,18 @@ class Historiales extends Model
         'updated_by',
     ];
 
-    public function bodega_origen(){
+    public function bodega_origen()
+    {
         return $this->belongsToMany(Bodegas::class, 'id_bodega_origen');
     }
 
-    public function bodega_destino(){
+    public function bodega_destino()
+    {
         return $this->belongsToMany(Bodegas::class, 'id_bodega_destino');
     }
 
-    public function inventario(){
+    public function inventario()
+    {
         return $this->belongsToMany(Inventarios::class, 'id_inventario');
     }
 }

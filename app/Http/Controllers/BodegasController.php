@@ -27,7 +27,6 @@ class BodegasController extends Controller
      */
     public function create()
     {
-        
     }
 
     /**

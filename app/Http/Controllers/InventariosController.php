@@ -59,7 +59,6 @@ class InventariosController extends Controller
                 'inventario' => $inventario,
             ]);
         }
-        
     }
 
     /**
@@ -96,16 +95,16 @@ class InventariosController extends Controller
         $inventario_origen = Inventarios::where('id_producto', $id_producto)->where('id_bodega', $id_bodega_origen)->first();
         $inventario_destino = Inventarios::where('id_producto', $id_producto)->where('id_bodega', $id_bodega_destino)->first();
         if (is_null($inventario_origen)) {
-            return response()->json(['error'=>'La bodega de origen no existe']);
+            return response()->json(['error' => 'La bodega de origen no existe']);
         } elseif ($inventario_origen->cantidad >= $request->cantidad && $request->cantidad > 0 && $inventario_destino !== null) {
-            $inventario_origen->cantidad = $inventario_origen->cantidad-$request->cantidad;
+            $inventario_origen->cantidad = $inventario_origen->cantidad - $request->cantidad;
             $inventario_origen->save();
         } else {
-            return response()->json(['error'=>'No hay suficiente cantidad en la bodega de origen ó la bodega de destino no existe']);
+            return response()->json(['error' => 'No hay suficiente cantidad en la bodega de origen ó la bodega de destino no existe']);
         }
         if ($inventario_origen->save()) {
             $inventario_destino = Inventarios::where('id_producto', $id_producto)->where('id_bodega', $id_bodega_destino)->first();
-            $inventario_destino->cantidad = $inventario_destino->cantidad+$request->cantidad;
+            $inventario_destino->cantidad = $inventario_destino->cantidad + $request->cantidad;
             $inventario_destino->save();
             if ($inventario_destino->save()) {
                 $historial = new Historiales();
@@ -115,10 +114,8 @@ class InventariosController extends Controller
                 $historial->cantidad = $request->cantidad;
                 $historial->save();
             }
-            return response()->json(['success'=>'Producto movido correctamente']);
+            return response()->json(['success' => 'Producto movido correctamente']);
         }
-        
-        
     }
 
     /**

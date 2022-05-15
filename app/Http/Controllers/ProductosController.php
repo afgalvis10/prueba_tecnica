@@ -61,7 +61,7 @@ class ProductosController extends Controller
         }
 
         return response()->json([
-            'msg' => 'Producto creado correctamente', 
+            'msg' => 'Producto creado correctamente',
         ]);
     }
 
