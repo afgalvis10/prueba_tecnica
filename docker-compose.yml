@@ -34,7 +34,7 @@ services:
         container_name: test-db
         restart: unless-stopped
         ports:
-            - ${SERVER_PORT_DB:-33306}:3307
+            - ${SERVER_PORT_DB:-33306}:3306
         volumes:
             - dbdata:/var/lib/mysql
         environment:
